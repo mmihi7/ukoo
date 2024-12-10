@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukoo - Comprehensive Genealogy Research Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-section {
+            border: 1px solid #888;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .form-field {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .form-field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .form-field input, 
+        .form-field textarea, 
+        .form-field select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+        }
+        .add-button, .remove-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .add-button .icon, .remove-button .icon {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        .add-button:hover, .remove-button:hover {
+            color: #007BFF;
+        }
+
+        .add-button:focus, .remove-button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Family Tree Data Collection Form</h1>
+
+    <div class="form-section">
+        <h2>Personal Information</h2>
+        <div class="form-row">
+            <div class="form-field">
+                <label>Surname</label>
+                <input type="text" name="surname" title="Enter your surname" placeholder="Surname">
+            </div>
+            <div class="form-field">
+                <label>Other Names</label>
+                <input type="text" name="other_names" title="Enter other names" placeholder="Other Names">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label>Date of Birth</label>
+                <input type="date" name="birth_date" title="Select your date of birth">
+            </div>
+            <div class="form-field">
+                <label>Place of Birth (City, State, Country)</label>
+                <input type="text" name="birth_place" title="Enter your place of birth" placeholder="City, State, Country">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label>Current Residence</label>
+                <input type="text" name="current_residence" title="Enter your current residence" placeholder="Current Residence">
+            </div>
+            <div class="form-field">
+                <label>Contact Phone</label>
+                <input type="tel" name="contact_phone" title="Enter your contact phone number" placeholder="Contact Phone">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label>Gender</label>
+                <select name="gender" title="Select your gender">
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-field">
+                <label>My Ancestry, my tribe, my clan, languages I speak, interesting facts</label>
+                <textarea name="cultural_description" rows="3" title="Describe your cultural background, tribe, clan details, etc."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2>Family Information</h2>
+        
+        <div class="form-section">
+            <h3>Spouse Information</h3>
+            <div id="spouse-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Spouse Name</label>
+                        <input type="text" name="spouse_name" title="Enter your spouse's name" placeholder="Spouse Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Spouse Date of Birth</label>
+                        <input type="date" name="spouse_birth_date" title="Select your spouse's date of birth">
+                    </div>
+                    <div class="form-field">
+                        <label>Spouse Status</label>
+                        <select name="spouse_status" title="Select spouse's status">
+                            <option value="">Select</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select name="spouse_gender" title="Select spouse's gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addSpouse()">
+                <span class="icon">+</span> <span class="label">Add Spouse</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Children Information</h3>
+            <div id="children-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Child Name</label>
+                        <input type="text" name="child_name" title="Enter the name of the child" placeholder="Child Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Child Birth Date</label>
+                        <input type="date" name="child_birth_date" title="Select child's birth date">
+                    </div>
+                    <div class="form-field">
+                        <label>Child Status</label>
+                        <select name="child_status" title="Select child's status">
+                            <option value="">Select</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select name="child_gender" title="Select child's gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addChild()">
+                <span class="icon">+</span> <span class="label">Add Child</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2>Lineage Information</h2>
+
+        <div class="form-section">
+            <h3>Parents</h3>
+            <div id="parents-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Parent Name</label>
+                        <input type="text" name="parent_name" title="Enter your parent's name" placeholder="Parent Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Parent Date of Birth</label>
+                        <input type="date" name="parent_birth_date" title="Select parent's date of birth">
+                    </div>
+                    <div class="form-field">
+                        <label>Parent Status</label>
+                        <select name="parent_status" title="Select parent's status">
+                            <option value="">Select</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select name="parent_gender" title="Select parent's gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addParent()">
+                <span class="icon">+</span> <span class="label">Add Parent</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Siblings</h3>
+            <div id="siblings-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Sibling Name</label>
+                        <input type="text" name="sibling_name" title="Enter your sibling's name" placeholder="Sibling Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Sibling Date of Birth</label>
+                        <input type="date" name="sibling_birth_date" title="Select sibling's date of birth">
+                    </div>
+                    <div class="form-field">
+                        <label>Sibling Status</label>
+                        <select name="sibling_status" title="Select sibling's status">
+                            <option value="">Select</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select name="sibling_gender" title="Select sibling's gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addSibling()">
+                <span class="icon">+</span> <span class="label">Add Sibling</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Ancestors</h3>
+            <div id="ancestors-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Ancestor Name</label>
+                        <input type="text" name="ancestor_name" title="Enter your ancestor's name" placeholder="Ancestor Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Ancestor Date of Birth</label>
+                        <input type="date" name="ancestor_birth_date" title="Select ancestor's date of birth">
+                    </div>
+                    <div class="form-field">
+                        <label>Ancestor Status</label>
+                        <select name="ancestor_status" title="Select ancestor's status">
+                            <option value="">Select</option>
+                            <option value="living">Living</option>
+                            <option value="deceased">Deceased</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select name="ancestor_gender" title="Select ancestor's gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addAncestor()">
+                <span class="icon">+</span> <span class="label">Add Ancestor</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2>Life Events</h2>
+
+        <div class="form-section">
+            <h3>Baptism</h3>
+            <div id="baptism-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Baptism Date</label>
+                        <input type="date" name="baptism_date" title="Select baptism date">
+                    </div>
+                    <div class="form-field">
+                        <label>Location</label>
+                        <input type="text" name="baptism_location" title="Enter baptism location" placeholder="Location">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addBaptism()">
+                <span class="icon">+</span> <span class="label">Add Baptism</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Marriage</h3>
+            <div id="marriage-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Marriage Date</label>
+                        <input type="date" name="marriage_date" title="Select marriage date">
+                    </div>
+                    <div class="form-field">
+                        <label>Location</label>
+                        <input type="text" name="marriage_location" title="Enter marriage location" placeholder="Location">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addMarriage()">
+                <span class="icon">+</span> <span class="label">Add Marriage</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Education</h3>
+            <div id="education-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Institution Name</label>
+                        <input type="text" name="education_institution" title="Enter institution name" placeholder="Institution Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Year of Graduation</label>
+                        <input type="text" name="education_year" title="Enter year of graduation (e.g., YYYY)">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addEducation()">
+                <span class="icon">+</span> <span class="label">Add Education</span>
+            </button>
+        </div>
+
+        <div class="form-section">
+            <h3>Work</h3>
+            <div id="work-container">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Workplace Name</label>
+                        <input type="text" name="workplace_name" title="Enter workplace name" placeholder="Workplace Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Workplace Location</label>
+                        <input type="text" name="workplace_location" title="Enter workplace location" placeholder="Location">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Year</label>
+                        <input type="text" name="work_year" title="Enter the year of employment (e.g., YYYY)">
+                    </div>
+                    <div class="form-field">
+                        <label>Achievements/Roles/Milestones</label>
+                        <textarea name="work_achievements" rows="3" title="List achievements, roles, or milestones in your work life"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addWork()">
+                <span class="icon">+</span> <span class="label">Add Work Experience</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function addSpouse() {
+            const spouseContainer = document.getElementById('spouse-container');
+            const newSpouse = document.createElement('div');
+            newSpouse.classList.add('form-row');
+            newSpouse.innerHTML = `
+                <div class="form-field">
+                    <label>Spouse Name</label>
+                    <input type="text" name="spouse_name" title="Enter your spouse's name" placeholder="Spouse Name">
+                </div>
+                <div class="form-field">
+                    <label>Spouse Date of Birth</label>
+                    <input type="date" name="spouse_birth_date" title="Select your spouse's date of birth">
+                </div>
+                <div class="form-field">
+                    <label>Spouse Status</label>
+                    <select name="spouse_status" title="Select spouse's status">
+                        <option value="">Select</option>
+                        <option value="living">Living</option>
+                        <option value="deceased">Deceased</option>
+                    </select>
+                </div>
+                <button type="button" class="remove-button" onclick="removeElement(this)">
+                    <span class="icon">-</span> <span class="label">Remove</span>
+                </button>
+            `;
+            spouseContainer.appendChild(newSpouse);
+        }
+
+        function addChild() {
+            const childrenContainer = document.getElementById('children-container');
+            const newChild = document.createElement('div');
+            newChild.classList.add('form-row');
+            newChild.innerHTML = `
+                <div class="form-field">
+                    <label>Child Name</label>
+                    <input type="text" name="child_name" title="Enter the name of the child" placeholder="Child Name">
+                </div>
+                <div class="form-field">
+                    <label>Child Birth Date</label>
+                    <input type="date" name="child_birth_date" title="Select child's birth date">
+                </div>
+                <div class="form-field">
+                    <label>Child Status</label>
+                    <select name="child_status" title="Select child's status">
+                        <option value="">Select</option>
+                        <option value="living">Living</option>
+                        <option value="deceased">Deceased</option>
+                    </select>
+                </div>
+                <button type="button" class="remove-button" onclick="removeElement(this)">
+                    <span class="icon">-</span> <span class="label">Remove</span>
+                </button>
+            `;
+            childrenContainer.appendChild(newChild);
+        }
+
+        function addWork() {
+            const workContainer = document.getElementById('workplaces-container');
+            const newWork = document.createElement('div');
+            newWork.classList.add('form-row');
+            newWork.innerHTML = `
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Workplace Name</label>
+                        <input type="text" name="workplace_name" title="Enter workplace name" placeholder="Workplace Name">
+                    </div>
+                    <div class="form-field">
+                        <label>Workplace Location</label>
+                        <input type="text" name="workplace_location" title="Enter workplace location" placeholder="Location">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Year</label>
+                        <input type="text" name="work_year" title="Enter the year of employment (e.g., YYYY)">
+                    </div>
+                    <div class="form-field">
+                        <label>Achievements/Roles/Milestones</label>
+                        <textarea name="work_achievements" rows="3" title="List achievements, roles, or milestones in your work life"></textarea>
+                    </div>
+                </div>
+                <button type="button" class="remove-button" onclick="removeElement(this)">
+                    <span class="icon">-</span> <span class="label">Remove</span>
+                </button>
+            `;
+            workContainer.appendChild(newWork);
+        }
+
+        function removeElement(button) {
+            const row = button.parentElement;
+            row.remove();
+        }
+    </script>
+</body>
+</html>
